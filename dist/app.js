@@ -1,0 +1,15 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const tslib_1 = require("tslib");
+require("dotenv").config();
+const express_1 = tslib_1.__importDefault(require("express"));
+const body_parser_1 = tslib_1.__importDefault(require("body-parser"));
+const routes_1 = tslib_1.__importDefault(require("./routes/routes"));
+const _404_1 = require("./controllers/errors/404");
+const errorHandler_1 = require("./controllers/errors/errorHandler");
+const app = (0, express_1.default)();
+app.use(body_parser_1.default.json());
+app.use("/lendsqr", routes_1.default);
+app.use(_404_1.error404);
+app.use(errorHandler_1.errorHandler);
+exports.default = app;
